@@ -8,11 +8,22 @@ public class ExamenFinal {
         Cancion c2 = new Cancion("Starboy", 230, "The Weeknd");
         Cancion c3 = new Cancion("Save Your Tears", 215, "The Weeknd");
 
-        // Verificación inicial de polimorfismo (Commit 1)
+        // Verificación inicial de polimorfismo (Fase 1)
         System.out.println("=== PRUEBA DE POLIMORFISMO ===");
         c1.reproducir();
         c2.reproducir();
         c3.reproducir();
+        System.out.println();
+
+        // Verificación de Lista Doble e Inserción (Fase 2)
+        System.out.println("=== PRUEBA DE PLAYLIST (FASE 2) ===");
+        Playlist playlist = new Playlist();
+        playlist.agregarCancion(c1);
+        playlist.agregarCancion(c2);
+        playlist.agregarCancion(c3);
+
+        // Mostrar lista completa de cabeza a cola
+        playlist.mostrarPlaylist();
         System.out.println();
     }
 }
