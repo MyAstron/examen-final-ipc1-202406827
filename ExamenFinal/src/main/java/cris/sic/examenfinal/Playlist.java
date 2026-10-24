@@ -1,9 +1,5 @@
 package cris.sic.examenfinal;
 
-/**
- * Lista doblemente enlazada para gestionar la reproducción de canciones.
- * Implementada desde cero sin utilizar colecciones de java.util.
- */
 public class Playlist {
 
     private NodoDoble cabeza;
@@ -18,12 +14,6 @@ public class Playlist {
         this.tamanio = 0;
     }
 
-    /**
-     * Inserta una canción al final de la playlist conectando los punteros bidireccionales.
-     * Si la lista está vacía, cabeza, cola y actual apuntan al nuevo nodo.
-     *
-     * @param c Canción a insertar en la lista.
-     */
     public void agregarCancion(Cancion c) {
         if (c == null) {
             return;
@@ -42,9 +32,6 @@ public class Playlist {
         tamanio++;
     }
 
-    /**
-     * Recorre e imprime la playlist completa de cabeza a cola en consola.
-     */
     public void mostrarPlaylist() {
         if (cabeza == null) {
             System.out.println("La playlist está vacía.");
@@ -63,7 +50,68 @@ public class Playlist {
         System.out.println("================================");
     }
 
-    // Métodos de acceso y control de estado
+    public void siguiente() {
+        if (actual == null) {
+            System.out.println("La playlist está vacía.");
+            return;
+        }
+        if (actual.getSiguiente() == null) {
+            System.out.println("Fin de la lista. No hay siguiente canción.");
+            return;
+        }
+        actual = actual.getSiguiente();
+        actual.getDato().reproducir();
+    }
+
+    public void anterior() {
+        if (actual == null) {
+            System.out.println("La playlist está vacía.");
+            return;
+        }
+        if (actual.getAnterior() == null) {
+            System.out.println("Inicio de la lista. No hay canción anterior.");
+            return;
+        }
+        actual = actual.getAnterior();
+        actual.getDato().reproducir();
+    }
+
+    public void eliminarActual() {
+        if (actual == null) {
+            System.out.println("No hay canción seleccionada para eliminar.");
+            return;
+        }
+
+        Cancion eliminada = actual.getDato();
+
+        if (cabeza == cola) {
+            cabeza = null;
+            cola = null;
+            actual = null;
+        } else if (actual == cabeza) {
+            cabeza = cabeza.getSiguiente();
+            cabeza.setAnterior(null);
+            actual.setSiguiente(null);
+            actual = cabeza;
+        } else if (actual == cola) {
+            cola = cola.getAnterior();
+            cola.setSiguiente(null);
+            actual.setAnterior(null);
+            actual = cola;
+        } else {
+            NodoDoble ant = actual.getAnterior();
+            NodoDoble sig = actual.getSiguiente();
+            ant.setSiguiente(sig);
+            sig.setAnterior(ant);
+            actual.setAnterior(null);
+            actual.setSiguiente(null);
+            actual = sig;
+        }
+
+        tamanio--;
+        System.out.println("Canción eliminada: \"" + eliminada.getTitulo() + "\"");
+    }
+
     public NodoDoble getCabeza() {
         return cabeza;
     }

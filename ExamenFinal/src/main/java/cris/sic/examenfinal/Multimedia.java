@@ -2,7 +2,7 @@ package cris.sic.examenfinal;
 
 public abstract class Multimedia {
     private String titulo;
-    private int duracion; // en segundos
+    private int duracion;
 
     public Multimedia(String titulo, int duracion) {
         this.titulo = titulo;

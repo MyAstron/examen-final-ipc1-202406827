@@ -2,28 +2,52 @@ package cris.sic.examenfinal;
 
 public class ExamenFinal {
 
-    public static void main(String[] args) {
-        // 1. Crear 3 canciones distintas
-        Cancion c1 = new Cancion("Blinding Lights", 200, "The Weeknd");
-        Cancion c2 = new Cancion("Starboy", 230, "The Weeknd");
-        Cancion c3 = new Cancion("Save Your Tears", 215, "The Weeknd");
+    public static void pausar(int milisegundos) {
+        try {
+            Thread.sleep(milisegundos);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
 
-        // Verificación inicial de polimorfismo (Fase 1)
+    public static void main(String[] args) {
+        Cancion c1 = new Cancion("Blinding Lights", 2000, "The Weeknd");
+        Cancion c2 = new Cancion("Starboy", 2300, "The Weeknd");
+        Cancion c3 = new Cancion("Save Your Tears", 2150, "The Weeknd");
+
         System.out.println("=== PRUEBA DE POLIMORFISMO ===");
         c1.reproducir();
         c2.reproducir();
         c3.reproducir();
         System.out.println();
+        pausar(1500);
 
-        // Verificación de Lista Doble e Inserción (Fase 2)
-        System.out.println("=== PRUEBA DE PLAYLIST (FASE 2) ===");
         Playlist playlist = new Playlist();
         playlist.agregarCancion(c1);
         playlist.agregarCancion(c2);
         playlist.agregarCancion(c3);
 
-        // Mostrar lista completa de cabeza a cola
+        System.out.println("=== INICIANDO SIMULACION DEL REPRODUCTOR ===");
         playlist.mostrarPlaylist();
-        System.out.println();
+        pausar(1500);
+
+        System.out.println("\n-> Ejecutando siguiente():");
+        playlist.siguiente();
+        pausar(1500);
+
+        System.out.println("\n-> Ejecutando siguiente():");
+        playlist.siguiente();
+        pausar(1500);
+
+        System.out.println("\n-> Ejecutando anterior():");
+        playlist.anterior();
+        pausar(1500);
+
+        System.out.println("\n-> Eliminando cancion actual...");
+        playlist.eliminarActual();
+        pausar(1500);
+
+        System.out.println("\n-> Estado final de la playlist:");
+        playlist.mostrarPlaylist();
     }
 }
